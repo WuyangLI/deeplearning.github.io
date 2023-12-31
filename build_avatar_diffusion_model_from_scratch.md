@@ -71,8 +71,14 @@ Clearly, the model exhibits a strong bias as it consistently produces images dep
 
 In one word, for diffusion models, it's essential that the normalized pixel values fall within the range of [−1,1] because Gaussian noise has zero mean and unit variance. 
 
+# Conditional Diffusion Model
+We overcome the "mode collapsing" problem by constructing a conditional diffusion model aimed at generating cartoon avatars with given attributes. As depicted in the diagram, it comprises three key components: the conditioning module, UNet featuring attention mechanisms, and the diffusion process.
 
+<p align=center>
+  <img src="figures/conditional_diffusion.drawio.png" alt="conditional diffusion model" width="800"/>
+</p>
 
+The primary emphasis of this blog centers on the modifications I introduced to transform the vanilla diffusion model into its conditional version. Except the conditioning module (Tau) and attention modules (MultiHeadCrossAttention), the foundational building blocks of the UNet were largely adapted from the two repositories referenced earlier.
 
 
 
