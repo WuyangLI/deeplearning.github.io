@@ -34,4 +34,37 @@ As [Djib2011](https://datascience.stackexchange.com/users/34269/djib2011) explai
 > 
 >In order to derive their intialization they make a few assumptions, one of which is that the input features have a zero mean. You can read this post for simplified explanation, but I'd suggest reading the two papers mentioned above.
 
+Initially, I attempted to train a basic diffusion model without any conditions. 
+<p align=center>
+  <img src="figures/conditional_diffusion-diffusion.drawio.png" alt="basic diffusion model" width="400"/>
+</p>
+In my first trial, I normalized the image tensors to fall within the [0, 1] range. 
+However, after the first epoch of training, the model didn't show much learning and generated random noise as output. 
+<p align=center>
+  <img src="figures/figure1_vanilla_diffusion_0_ep0.png" alt="figure 1" width="800"/>
+</p>
+It took around 4 epochs for the model to begin generating images that weren't just white noise.
+<p align=center>
+  <img src="figures/figure2_vanilla_diffusion_0_ep4.png" alt="figure 2" width="800"/>
+</p>
+Subsequently, when I adjusted the image tensors to the [-1, 1] range, the model started learning the features of avatars more rapidly. The model is able to generate the following samples after training for the first epoch.
+<p align=center>
+  <img src="figures/figure3_vanilla_diffusion_1_ep0.png" alt="figure 3" width="800"/>
+</p>
+As seen in figure 4, it took 6 epochs for the model to produce some images resembling faces. 
+<p align=center>
+  <img src="figures/figure4_vanilla_diffusion_1_ep6.png" alt="figure 4" width="800"/>
+</p>
+
+By "epoch 39," the model managed to capture attributes such as skin tone, glasses, eye color, eye shape, and various hairline shapes.
+
+However, the model struggled to learn different hairstyles and to paint them in good colors. 
+For diffusion models, it's essential that the pixel values fall within the range of [−1,1] because Gaussian noise has zero mean and unit variance. Consequently, I utilized a lambda function to transform the range from [0,1] to [−1,1]. This explains why the model performs better when the normalization range is adjusted to [-1,1].
+
+
+
+
+
+
+
 
