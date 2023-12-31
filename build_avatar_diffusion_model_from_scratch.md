@@ -118,6 +118,13 @@ However, when each attribute was treated as categorical features and concatenate
 </p>
 <p align=center>figure 11 - epoch 10 with binarized attributess</p>
 
+**Condition Module - number of projections**
+number of projections of the Tau module
+The module Tau reminds me of the Mapping network in [StyleGAN](https://arxiv.org/pdf/1812.04948.pdf)
+
+
+
+
 
 
 
