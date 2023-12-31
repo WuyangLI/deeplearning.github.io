@@ -78,7 +78,52 @@ We overcome the "mode collapsing" problem by constructing a conditional diffusio
   <img src="figures/conditional_diffusion.drawio.png" alt="conditional diffusion model" width="800"/>
 </p>
 
-The primary emphasis of this blog centers on the modifications I introduced to transform the vanilla diffusion model into its conditional version. Except the conditioning module (Tau) and attention modules (MultiHeadCrossAttention), the foundational building blocks of the UNet were largely adapted from the two repositories referenced earlier.
+The primary emphasis of this blog centers on the modifications I introduced to transform the vanilla diffusion model into its conditional version. Except the conditioning module (Tau) and attention modules (MultiHeadCrossAttention), the foundational building blocks of the UNet and diffusion process are largely adapted from the two repositories referenced earlier.
+
+### Conditioning Module 
+
+Add gist for Conditioning module
+  
+The conditioning module receives avatar attributes in numerical form and produces conditioning embeddings utilized within the attention modules of the UNet. Essentially, this module functions as a series of linear projections, transforming avatar attributes into an embedding space. This space proves more effective within the attention mechanism, working in tandem with extracted image features across various scales.
+
+There are two noteworthy findings to highlight from this process.
+
+**Representation of Attributes**
+Using one-hot vectors versus original attribute values has yielded different results in conditioning the model.
+
+Initially, I employed the original attribute values, creating a vector composed of 18 integers as the conditioning input. It took the model approximately 2 epochs to generate facial-like outputs and about 10 epochs to accurately represent various facial characteristics corresponding to the input conditioning attributes.
+
+Here are randomly selected samples of generated images with conditioning attributes presented in the form of a vector of 18 integers.
+
+<p align=center>
+  <img src="figures/figure7_conditional_diffusion_0_ep0.png" alt="figure 7 - epoch 0 with original attributes" width="800"/>
+</p>
+<p align=center>figure 7 - epoch 0 with original attributes</p>
+<p align=center>
+  <img src="figures/figure8_conditional_diffusion_0_ep2.png" alt="figure 8 - epoch 2 with original attributes" width="800"/>
+</p>
+<p align=center>figure 8 - epoch 2 with original attributes</p>
+<p align=center>
+  <img src="figures/figure9_conditional_diffusion_0_ep10.png" alt="figure 9 - epoch 10 with original attributes" width="800"/>
+</p>
+<p align=center>figure 9 - epoch 10 with original attributes</p>
+However, when each attribute was treated as categorical features and concatenated into a single comprehensive binary vector (217), surprising results emerged. The model remarkably produced face-like images after just one epoch of training from scratch. By epoch 10, it managed to capture different hairstyles, although the hair color remained predominantly grey or white.
+
+<p align=center>
+  <img src="figures/figure10_conditional_diffusion_1_ep0.png" alt="figure 10 - epoch 0 with binarized attributes" width="800"/>
+</p>
+<p align=center>figure 10 - epoch 0 with binarized attributes</p>
+<p align=center>
+  <img src="figures/figure11_conditional_diffusion_1_ep10.png" alt="figure 11 - epoch 10 with binarized attributes" width="800"/>
+</p>
+<p align=center>figure 11 - epoch 10 with binarized attributess</p>
+
+
+
+
+
+
+
 
 
 
