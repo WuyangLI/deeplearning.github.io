@@ -205,9 +205,12 @@ A decrease in loss doesn't guarantee improved image quality. In certain instance
 
 
 
-### [Model Memory Anatomy](https://huggingface.co/docs/transformers/model_memory_anatomy)
+### Model Memory Anatomy
 
-trainable parameters of the avatar diffusion model is 76,464,439 (76 million)
+During the iterative process with your model, encountering an "OutOfMemory" error is not uncommon. It can be puzzling to see that a relatively small model consumes the entire GPU memory.
+This section is inspired by [the huggingface blog -model memory anatomy](https://huggingface.co/docs/transformers/model_memory_anatomy)
+
+Trainable parameters of the avatar diffusion model is 76,464,439 (76 million)
 
 To give you an idea of the size of the model, the following are the size of popular resnet models:
 |model name|number of parameters|
