@@ -17,7 +17,9 @@ Before getting started with the practical lab, if you're looking to deepen your 
 
 # Dataset and Preprocessing
 Cartoon Set is a collection of 2D cartoon avatar images, as illustrated below.
-ADD IMAGES
+<p align=center>
+  <img src="figures/cartoon-set-google.png" alt="cartoon set google" width="500"/>
+</p>
 This data is licensed by Google LLC under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 We apply the following preprocessing to images:
 1. Central crop 360 pixels
@@ -88,7 +90,8 @@ The conditioning module receives avatar attributes in numerical form and produce
 
 There are two noteworthy findings to highlight from this process.
 
-**Representation of Attributes**
+**Finding 1: Representation of Attributes**
+
 Using one-hot vectors versus original attribute values has yielded different results in conditioning the model.
 
 Initially, I employed the original attribute values, creating a vector composed of 18 integers as the conditioning input. It took the model approximately 2 epochs to generate facial-like outputs and about 10 epochs to accurately represent various facial characteristics corresponding to the input conditioning attributes.
@@ -118,10 +121,49 @@ However, when each attribute was treated as categorical features and concatenate
 </p>
 <p align=center>figure 11 - epoch 10 with binarized attributess</p>
 
-**Condition Module - number of projections**
+
+**Finding 2: Condition Module - number of projections**
+
 number of projections of the Tau module
+
 The module Tau reminds me of the Mapping network in [StyleGAN](https://arxiv.org/pdf/1812.04948.pdf)
 
+<p align=center>
+  <img src="figures/mapping-network-style-gan.png" alt="" width="400"/>
+</p>
+
+Does higher complexity of the Tau module lead to improved generated images? Regrettably, no, solely relying on the Tau module doesn't bring about significant improvements.
+
+Introducing attention and Tau to the original diffusion model enables us to train a model that adeptly captures most avatar attributes, with the exception of color. To address this color issue, I experimented with doubling the number of Tau's projections. However, merely increasing the projection count doesn't seem to notably enhance the results.
+
+By the 9th epoch, the model managed to generate green hair! It accurately captured the outlines and shapes of avatars, yet the color accuracy remained a challenge. 
+
+<p align=center>
+  <img src="figures/figure12_conditional_diffusion_2_ep9.png" alt="figure 12" width="800"/>
+</p>
+
+Even beyond epoch 20, the color of the generated random samples continued to be inaccurate.
+
+<p align=center>
+  <img src="figures/figure12_conditional_diffusion_2_ep20.png" alt=figure 12-1" width="800"/>
+</p>
+
+### Attention Modules in UNet
+[Attention vs Multi-head attention](https://ai.stackexchange.com/questions/25148/what-is-different-in-each-head-of-a-multi-head-attention-mechanism)
+
+In order to facilitate the model's understanding of colors, I exchanged the simple attention mechanism with a multi-head attention setup, consisting of 4 heads.
+
+Interestingly, this shift to multi-head attention allowed the model to finally grasp the concept of the colors of hair.
+
+By the 9th epoch, as shown in the randomly generated images, the model demonstrated the ability to generate hair colors spanning grey, white, brown, yellow, and blond!
+<p align=center>
+  <img src="figures/figure13_conditional_diffusion_3_ep9.png" alt=figure 13" width="800"/>
+</p>
+
+However, the decrease in loss wasn't consistent beyond epoch 9. From a qualitative standpoint, there wasn't a noticeable visual enhancement observed between epoch 9 and epoch 18. Notably, there were perceptible artifacts such as green or blue pixels appearing on faces or hair.
+<p align=center>
+  <img src="figures/figure14_conditional_diffusion_3_ep18.png" alt=figure 14" width="800"/>
+</p>
 
 
 
