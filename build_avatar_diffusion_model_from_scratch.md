@@ -207,9 +207,14 @@ A decrease in loss doesn't guarantee improved image quality. In certain instance
 
 ### [Model Memory Anatomy](https://huggingface.co/docs/transformers/model_memory_anatomy)
 
-trainable model parameters of the avatar diffusion model: 76,464,439 (76 million)
-to give you an idea of the size of the model, 
-Resnet18: 11 million, Resnet50: 23 million, Resnet152: 60 million
+trainable parameters of the avatar diffusion model is 76,464,439 (76 million)
+
+To give you an idea of the size of the model, the following are the size of popular resnet models:
+|model name|number of parameters|
+|:------|:-----|
+|Resnet18|11 million|
+|Resnet50|23 million|
+|Resnet152|60 million|
 
 the following table is a breakdown of model memory
 |memory breakdown|bytes per parameter|memory|
