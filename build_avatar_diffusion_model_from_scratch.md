@@ -183,6 +183,9 @@ Despite noticing minor imperfections on the face and in the background, we succe
 ### Other Learnings
 #### Noise Level
 While it may appear evident, discovering an appropriate noise level for the forward process is essential. It's imperative to visualize the forward process before commencing model training. If the noise level is excessively high, the model will continue to produce random noise even after several epochs of training.
+<p align=center>
+  <img src="figures/noise-level-screenshot.png" alt="" width="800"/>
+</p>
 
 #### Learning Rate Schedule
 Similar to training any other neural networks, establishing an effective learning rate schedule holds significant importance, particularly when aiming to train a model capable of generating high-quality images.
