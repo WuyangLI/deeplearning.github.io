@@ -165,7 +165,7 @@ However, the decrease in loss wasn't consistent beyond epoch 9. From a qualitati
   <img src="figures/figure14_conditional_diffusion_3_ep18.png" alt=figure 14" width="800"/>
 </p>
 
-### Magic Interaction Between Multi-head Attention Modules and the Tau Module
+### Magic Interaction Between Multi-head Attention and Tau Module
 Following the incorporation of multi-head attention into the model, to further address the hair color issue discussed above, I increased the number of projections in Tau twofold while maintaining the number of heads unchanged. 
 
 Despite noticing minor imperfections on the face and in the background, we successfully completed the training of our avatar diffusion model!
