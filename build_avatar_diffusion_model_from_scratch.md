@@ -179,6 +179,23 @@ Despite noticing minor imperfections on the face and in the background, we succe
 </p>
 <p align=center>random samples of generated images at epoch 18</p>
 
+### [Model Memory Anatomy](https://huggingface.co/docs/transformers/model_memory_anatomy)
+
+trainable model parameters of the avatar diffusion model: 76,464,439 (76 million)
+to give you an idea of the size of the model, 
+Resnet18: 11 million, Resnet50: 23 million, Resnet152: 60 million
+
+the following table is a breakdown of model memory
+|memory breakdown|bytes per parameter|memory|
+|:---------------- | :------: | ----: |
+|model weight|4|291.69 MB|
+|adam optimizer|8|583.38 MB|
+|gradients|4|291.69 MB|
+|activations and tmp memory|8|583.38 MB (high-end)|
+|total memory needed|4 + 20 extra|2333.51 MB (high-end)|
+
+When training the model, we need an AWS g5 2xlarge instance with 24G GPU memory.
+
 
 
 
