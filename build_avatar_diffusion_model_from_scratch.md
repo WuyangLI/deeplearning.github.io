@@ -195,6 +195,9 @@ the following table is a breakdown of model memory
 |total memory needed|4 + 20 extra|2333.51 MB (high-end)|
 
 When training the model, we need an AWS g5 2xlarge instance with 24G GPU memory.
+<p align=center>
+  <img src="figures/nvidia-smi-screenshot.png" alt="" width="600"/>
+</p>
 
 
 
