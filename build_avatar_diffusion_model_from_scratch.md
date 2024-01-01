@@ -20,6 +20,7 @@ Cartoon Set is a collection of 2D cartoon avatar images, as illustrated below.
 <p align=center>
   <img src="figures/cartoon-set-google.png" alt="cartoon set google" width="500"/>
 </p>
+
 This data is licensed by Google LLC under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 We apply the following preprocessing to images:
 1. Central crop 360 pixels
@@ -178,6 +179,28 @@ Despite noticing minor imperfections on the face and in the background, we succe
   <img src="figures/figure16_conditional_diffusion_4_ep18.png" alt=figure 16" width="800"/>
 </p>
 <p align=center>random samples of generated images at epoch 18</p>
+
+### Other Learnings
+#### Noise Level
+While it may appear evident, discovering an appropriate noise level for the forward process is essential. It's imperative to visualize the forward process before commencing model training. If the noise level is excessively high, the model will continue to produce random noise even after several epochs of training.
+
+#### Learning Rate Schedule
+Similar to training any other neural networks, establishing an effective learning rate schedule holds significant importance, particularly when aiming to train a model capable of generating high-quality images.
+
+Regularly create checkpoints for the model and closely monitor the loss. If you observe the loss stagnating or suddenly experiencing a substantial increase, it's advisable to significantly reduce the learning rate.
+
+#### Lower loss doesn’t promise better image quality
+A decrease in loss doesn't guarantee improved image quality. In certain instances, the model effectively learns hair colors after the 10th epoch. Yet, beyond this point, although the loss continues to decrease steadily, the model appears to disregard the knowledge it previously acquired regarding hair color.
+<p align=center>
+  <img src="figures/figure17_conditional_diffusion_other_ep10.png" alt=figure 17" width="800"/>
+</p>
+<p align=center>sample of generated images by epoch 10</p>
+<p align=center>
+  <img src="figures/figure18_conditional_diffusion_other_ep14.png" alt=figure 18" width="800"/>
+</p>
+<p align=center>sample of generated images by epoch 14</p>
+
+
 
 ### [Model Memory Anatomy](https://huggingface.co/docs/transformers/model_memory_anatomy)
 
